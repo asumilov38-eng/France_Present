@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ФРАНЦИЯ - Географическое Описание</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            overflow: hidden;
+            color: white;
+            touch-action: none;
+        }
+
+        /* КАСТОМНЫЙ КУРСОР (скрыт на мобильных) */
+        .cursor, .cursor-dot {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .cursor {
+                display: block;
+                position: fixed;
+                width: 20px;
+                height: 20px;
+                border: 2px solid #00d4ff;
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                box-shadow: 0 0 20px #00d4ff, 0 0 40px #ff00ff;
+            }
+
+            .cursor-dot {
+                display: block;
+                position: fixed;
+                width: 6px;
+                height: 6px;
+                background: linear-gradient(135deg, #00d4ff, #ff00ff);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10001;
+            }
+
+            .cursor.hover {
+                transform: scale(2);
+                border-color: #ff00ff;
+            }
+        }
+
+        /* 3D FLUID BACKGROUND */
+        .fluid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0b2e 0%, #0d1b2a 50%, #1b0b2e 100%);
+            z-index: -2;
+        }
+
+        .fluid-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: fluidMove 20s infinite ease-in-out;
+        }
+
+        .fluid-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #ff00ff, #9d00ff);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        .fluid-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            top: 50%;
+            right: -150px;
+            animation-delay: -7s;
+        }
+
+        .fluid-3 {
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, #ff006e, #8338ec);
+            bottom: -150px;
+            left: 30%;
+            animation-delay: -14s;
+        }
+
+        .fluid-4 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #fb5607, #ff006e);
+            top: 30%;
+            left: 40%;
+            animation-delay: -21s;
+        }
+
+        @keyframes fluidMove {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(50px, -80px) scale(1.1) rotate(90deg); }
+            50% { transform: translate(-40px, 60px) scale(0.95) rotate(180deg); }
+            75% { transform: translate(30px, 40px) scale(1.05) rotate(270deg); }
+        }
+
+        /* NAVIGATION */
+        .nav-bar {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            cursor: none;
+        }
+
+        .nav-item:hover {
+            color: #00d4ff;
+            text-shadow: 0 0 20px #00d4ff;
+        }
+
+        /* PRESENTATION CONTAINER */
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 2000px;
+        }
+
+        /* SLIDES */
+        .slide {
+            position: absolute;
+            width: 90%;
+            max-width: 1400px;
+            height: 85vh;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(30px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 40px 100px rgba(0, 0, 0, 0.6),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            padding: 70px;
+            opacity: 0;
+            transform: translateX(100px) rotateY(-10deg);
+            pointer-events: none;
+            overflow-y: auto;
+            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0) rotateY(0);
+            pointer-events: all;
+        }
+
+        .slide.prev {
+            transform: translateX(-100px) rotateY(10deg);
+            opacity: 0;
+        }
+
+        /* SLIDE CONTENT */
+        .slide-header {
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            padding-bottom: 30px;
+        }
+
+        .slide-number {
+            font-size: 14px;
+            color: #00d4ff;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .slide-title {
+            font-size: 64px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff00ff 50%, #ff006e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .slide-content {
+            font-size: 20px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 25px;
+            padding: 35px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.4s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+
+        .info-card h3 {
+            font-size: 24px;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .info-card ul {
+            list-style: none;
+        }
+
+        .info-card li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-card li::before {
+            content: "▹";
+            position: absolute;
+            left: 10px;
+            color: #ff00ff;
+            font-size: 20px;
+        }
+
+        .highlight {
+            color: #00d4ff;
+            font-weight: 700;
+        }
+
+        /* IMAGES */
+        .image-showcase {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            margin: 30px 0;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-showcase img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .image-showcase:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 40px 30px 30px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* STATS */
+        .stats-container {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.4s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-8px) scale(1.05);
+            border-color: rgba(0, 212, 255, 0.6);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* NAVIGATION BUTTONS */
+        .nav-buttons {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .btn {
+            padding: 18px 50px;
+            background: linear-gradient(135deg, #00d4ff, #ff00ff);
+            border: none;
+            border-radius: 35px;
+            color: white;
+            font-weight: 800;
+            font-size: 16px;
+            cursor: none;
+            transition: all 0.4s;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.6);
+        }
+
+        .btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 20px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 30px;
+            border-radius: 25px;
+        }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #ff00ff, #ff006e);
+            transition: width 0.8s;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* SCROLLBAR */
+        .slide::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00d4ff, #ff00ff);
+            border-radius: 10px;
+        }
+
+        /* ===== АДАПТАЦИЯ ПОД ГОРИЗОНТАЛЬНЫЙ ЭКРАН ТЕЛЕФОНА ===== */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .slide {
+                padding: 30px;
+                height: 92vh;
+                width: 95%;
+            }
+
+            .slide-title {
+                font-size: 32px !important;
+            }
+
+            .slide-header {
+                margin-bottom: 20px;
+                padding-bottom: 15px;
+            }
+
+            .slide-number {
+                font-size: 11px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            .info-card {
+                padding: 20px;
+            }
+
+            .info-card h3 {
+                font-size: 18px;
+            }
+
+            .info-card li {
+                font-size: 14px;
+                padding: 8px 0;
+            }
+
+            .image-showcase {
+                margin: 15px 0;
+            }
+
+            .image-showcase img {
+                height: 200px;
+            }
+
+            .image-caption {
+                font-size: 14px;
+                padding: 20px 15px 15px;
+            }
+
+            .stats-container {
+                gap: 15px;
+                margin: 20px 0;
+            }
+
+            .stat-box {
+                min-width: 120px;
+                padding: 20px 15px;
+            }
+
+            .stat-number {
+                font-size: 32px;
+            }
+
+            .stat-label {
+                font-size: 12px;
+            }
+
+            .nav-bar {
+                padding: 10px 20px;
+                gap: 15px;
+                top: 10px;
+            }
+
+            .nav-item {
+                font-size: 11px;
+            }
+
+            .nav-buttons {
+                bottom: 20px;
+                gap: 15px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 13px;
+            }
+
+            .slide-counter {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+
+            .fluid-shape {
+                opacity: 0.3;
+            }
+        }
+
+        /* ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (горизонтально) */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .slide {
+                padding: 20px;
+                height: 95vh;
+            }
+
+            .slide-title {
+                font-size: 28px !important;
+            }
+
+            .slide-content {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            .info-card h3 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .image-showcase img {
+                height: 150px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+
+            .nav-bar {
+                display: none;
+            }
+        }
+
+        /* МОБИЛЬНЫЕ УСТРОЙСТВА (вертикально) */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .slide {
+                padding: 40px 25px;
+                width: 95%;
+                height: 88vh;
+            }
+
+            .slide-title {
+                font-size: 36px !important;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-bar {
+                display: none;
+            }
+
+            .stats-container {
+                flex-direction: column;
+            }
+
+            .stat-box {
+                min-width: 100%;
+            }
+        }
+
+        /* ДЕСКТОП */
+        @media (min-width: 1024px) {
+            .cursor.hover {
+                transform: scale(2);
+                border-color: #ff00ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- BACKGROUND -->
+    <div class="fluid-bg">
+        <div class="fluid-shape fluid-1"></div>
+        <div class="fluid-shape fluid-2"></div>
+        <div class="fluid-shape fluid-3"></div>
+        <div class="fluid-shape fluid-4"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav-bar">
+        <a href="#" class="nav-item" onclick="goToSlide(0)">ГЛАВНАЯ</a>
+        <a href="#" class="nav-item" onclick="goToSlide(1)">ГЕОГРАФИЯ</a>
+        <a href="#" class="nav-item" onclick="goToSlide(2)">РЕЛЬЕФ</a>
+        <a href="#" class="nav-item" onclick="goToSlide(3)">КЛИМАТ</a>
+        <a href="#" class="nav-item" onclick="goToSlide(4)">ВОДА</a>
+        <a href="#" class="nav-item" onclick="goToSlide(5)">ПРИРОДА</a>
+        <a href="#" class="nav-item" onclick="goToSlide(6)">НАСЕЛЕНИЕ</a>
+    </nav>
+
+    <div class="presentation-container">
+        <!-- SLIDE 1: TITLE -->
+        <div class="slide active" data-slide="0">
+            <div style="text-align: center; margin-top: 100px;">
+                <div class="animate" style="font-size: 24px; color: #00d4ff; letter-spacing: 8px; margin-bottom: 30px;">
+                    ГЕОГРАФИЧЕСКОЕ ОПИСАНИЕ
+                </div>
+                <h1 class="slide-title animate delay-1" style="font-size: 96px; margin: 40px 0;">
+                    ФРАНЦИЯ
+                </h1>
+                <p class="animate delay-2" style="font-size: 28px; color: rgba(255,255,255,0.8); margin: 30px 0;">
+                    République Française<br>
+                    <span style="color: #ff00ff;">Французская Республика</span>
+                </p>
+                <div class="image-showcase animate delay-3" style="max-width: 900px; margin: 60px auto;">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&h=500&fit=crop" alt="France">
+                    <div class="image-caption">Париж - столица Франции</div>
+                </div>
+                <p class="animate delay-3" style="font-size: 20px; color: rgba(255,255,255,0.6); margin-top: 40px;">
+                    Подготовил: Андрей Шумилов
+                </p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: LOCATION -->
+        <div class="slide" data-slide="1">
+            <div class="slide-header">
+                <div class="slide-number">01 / ГЕОГРАФИЧЕСКОЕ ПОЛОЖЕНИЕ</div>
+                <h1 class="slide-title">РАСПОЛОЖЕНИЕ<br>НА КАРТЕ</h1>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <div class="image-showcase">
+                        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&h=400&fit=crop" alt="Europe Map">
+                        <div class="image-caption">Франция в Западной Европе</div>
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat-box">
+                            <div class="stat-number">643 801</div>
+                            <div class="stat-label">км² площадь</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">67.8</div>
+                            <div class="stat-label">млн человек</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>ГЕОГРАФИЧЕСКОЕ ПОЛОЖЕНИЕ</h3>
+                    <ul>
+                        <li><span class="highlight">Расположение:</span> Западная Европа</li>
+                        <li><span class="highlight">Столица:</span> Париж</li>
+                        <li><span class="highlight">Граничит с:</span> Испанией, Италией, Швейцарией, Германией, Бельгией, Люксембургом, Андоррой, Монако</li>
+                        <li><span class="highlight">Омывается:</span><br>
+                            &nbsp;&nbsp;• Атлантический океан (запад)<br>
+                            &nbsp;&nbsp;• Ла-Манш (север)<br>
+                            &nbsp;&nbsp;• Средиземное море (юг)</li>
+                        <li><span class="highlight">Координаты:</span> 46° с.ш., 2° в.д.</li>
+                        <li><span class="highlight">Крупнейшая страна ЕС</span> по площади</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: RELIEF -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <div class="slide-number">02 / РЕЛЬЕФ</div>
+                <h1 class="slide-title">РЕЛЬЕФ И<br>ПОЛЕЗНЫЕ ИСКОПАЕМЫЕ</h1>
+            </div>
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>ОБЩИЙ ХАРАКТЕР ПОВЕРХНОСТИ</h3>
+                    <ul>
+                        <li><span class="highlight">Преобладают равнины:</span> 2/3 территории</li>
+                        <li><span class="highlight">Средняя высота:</span> 342 м над уровнем моря</li>
+                        <li><span class="highlight">Горы на юге и востоке:</span><br>
+                            &nbsp;&nbsp;• Альпы (Монблан 4807 м)<br>
+                            &nbsp;&nbsp;• Пиренеи (до 3404 м)<br>
+                            &nbsp;&nbsp;• Юра, Вогезы, Центральный массив</li>
+                        <li><span class="highlight">Равнины:</span><br>
+                            &nbsp;&nbsp;• Парижский бассейн<br>
+                            &nbsp;&nbsp;• Аквитанская низменность<br>
+                            &nbsp;&nbsp;• Долина Луары</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-showcase">
+                        <img src="https://images.unsplash.com/photo-1531366941340-ee903a2ed294?w=800&h=400&fit=crop" alt="Mont Blanc">
+                        <div class="image-caption">Монблан - высочайшая точка</div>
+                    </div>
+                    <div class="info-card" style="margin-top: 30px;">
+                        <h3>ПОЛЕЗНЫЕ ИСКОПАЕМЫЕ</h3>
+                        <ul>
+                            <li>Железная руда</li>
+                            <li>Уран</li>
+                            <li>Бокситы</li>
+                            <li>Каменный уголь</li>
+                            <li>Природный газ</li>
+                            <li>Калийные соли</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: CLIMATE -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <div class="slide-number">03 / КЛИМАТ</div>
+                <h1 class="slide-title">КЛИМАТИЧЕСКИЕ<br>УСЛОВИЯ</h1>
+            </div>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">+20°C</div>
+                    <div class="stat-label">средняя температура июля</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">+5°C</div>
+                    <div class="stat-label">средняя температура января</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">800-1000</div>
+                    <div class="stat-label">мм осадков в год</div>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>КЛИМАТИЧЕСКИЕ ПОЯСА</h3>
+                    <ul>
+                        <li><span class="highlight">Умеренный морской</span> (запад и север)</li>
+                        <li><span class="highlight">Средиземноморский</span> (юг)</li>
+                        <li><span class="highlight">Континентальный</span> (восток)</li>
+                        <li><span class="highlight">Горный</span> (Альпы, Пиренеи)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>СЕЗОННЫЕ РАЗЛИЧИЯ</h3>
+                    <ul>
+                        <li><span class="highlight">Лето:</span> тёплое, +20-25°C</li>
+                        <li><span class="highlight">Зима:</span> мягкая, +3-7°C</li>
+                        <li><span class="highlight">Осадки:</span> равномерно в течение года</li>
+                        <li><span class="highlight">На юге:</span> 300 солнечных дней в году</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-showcase" style="margin-top: 40px;">
+                <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&h=400&fit=crop" alt="French Riviera">
+                <div class="image-caption">Средиземноморское побережье - Лазурный берег</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: RIVERS -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <div class="slide-number">04 / ВОДНЫЕ РЕСУРСЫ</div>
+                <h1 class="slide-title">РЕКИ И ОЗЁРА</h1>
+            </div>
+            <div class="content-grid">
+                <div>
+                    <div class="image-showcase">
+                        <img src="https://images.unsplash.com/photo-1499856871958-5b9627545c1a?w=800&h=400&fit=crop" alt="Seine">
+                        <div class="image-caption">Река Сена в Париже</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>КРУПНЕЙШИЕ РЕКИ</h3>
+                    <ul>
+                        <li><span class="highlight">Сена:</span> 776 км (Париж)</li>
+                        <li><span class="highlight">Луара:</span> 1012 км (самая длинная)</li>
+                        <li><span class="highlight">Рона:</span> 812 км (впадает в Средиземное море)</li>
+                        <li><span class="highlight">Гаронна:</span> 647 км (юго-запад)</li>
+                        <li><span class="highlight">Рейн:</span> граница с Германией</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stats-container" style="margin-top: 40px;">
+                <div class="stat-box">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">основных речных систем</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">км береговой линии</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: NATURE ZONES -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <div class="slide-number">05 / ПРИРОДНЫЕ ЗОНЫ</div>
+                <h1 class="slide-title">ПРИРОДА<br>ФРАНЦИИ</h1>
+            </div>
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>ПРИРОДНЫЕ ЗОНЫ</h3>
+                    <ul>
+                        <li><span class="highlight">Широколиственные леса:</span><br>
+                            &nbsp;&nbsp;дуб, бук, граб (север и центр)</li>
+                        <li><span class="highlight">Смешанные леса:</span><br>
+                            &nbsp;&nbsp;хвойные и лиственные породы</li>
+                        <li><span class="highlight">Средиземноморская растительность:</span><br>
+                            &nbsp;&nbsp;маквис, пробковый дуб, оливки</li>
+                        <li><span class="highlight">Высокогорья:</span><br>
+                            &nbsp;&nbsp;альпийские луга</li>
+                        <li><span class="highlight">Болота:</span><br>
+                            &nbsp;&nbsp;Камарг (дельта Роны)</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="image-showcase">
+                        <img src="https://images.unsplash.com/photo-1548685913-fe5778af8120?w=800&h=400&fit=crop" alt="Lavender">
+                        <div class="image-caption">Прованс - лавандовые поля</div>
+                    </div>
+                    <div class="info-card" style="margin-top: 30px;">
+                        <h3>ЖИВОТНЫЙ МИР</h3>
+                        <ul>
+                            <li>Косули, олени, кабаны</li>
+                            <li>Серны в Альпах</li>
+                            <li>Розовые фламинго (Камарг)</li>
+                            <li>Множество видов птиц</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: POPULATION -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header">
+                <div class="slide-number">06 / НАСЕЛЕНИЕ</div>
+                <h1 class="slide-title">НАРОДЫ<br>И ЗАНЯТИЯ</h1>
+            </div>
+            <div class="stats-container">
+                <div class="stat-box">
+                    <div class="stat-number">67.8</div>
+                    <div class="stat-label">млн человек</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">118</div>
+                    <div class="stat-label">чел/км² плотность</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">городское население</div>
+                </div>
+            </div>
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>НАРОДЫ</h3>
+                    <ul>
+                        <li><span class="highlight">Французы:</span> 86%</li>
+                        <li><span class="highlight">Иммигранты:</span> 14%<br>
+                            &nbsp;&nbsp;• португальцы<br>
+                            &nbsp;&nbsp;• итальянцы<br>
+                            &nbsp;&nbsp;• испанцы<br>
+                            &nbsp;&nbsp;• выходцы из Северной Африки</li>
+                        <li><span class="highlight">Язык:</span> французский</li>
+                        <li><span class="highlight">Религия:</span> католицизм (основная)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h3>ОСНОВНЫЕ ЗАНЯТИЯ</h3>
+                    <ul>
+                        <li><span class="highlight">Сфера услуг:</span> 70%<br>
+                            &nbsp;&nbsp;туризм, финансы, торговля</li>
+                        <li><span class="highlight">Промышленность:</span> 20%<br>
+                            &nbsp;&nbsp;авиастроение, авто, химия</li>
+                        <li><span class="highlight">Сельское хозяйство:</span> 3%<br>
+                            &nbsp;&nbsp;виноделие, зерновые, животноводство</li>
+                        <li><span class="highlight">Высококвалифицированные кадры</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-showcase" style="margin-top: 40px;">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&h=400&fit=crop" alt="Paris People">
+                <div class="image-caption">Париж - крупнейший город Франции</div>
+            </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="nav-buttons">
+            <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← Назад</button>
+            <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">7</span></div>
+            <button class="btn" id="nextBtn" onclick="changeSlide(1)">Вперёд →</button>
+        </div>
+
+        <!-- PROGRESS -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <script>
+        // CURSOR (только для десктопа)
+        if (window.innerWidth >= 1024) {
+            const cursor = document.getElementById('cursor');
+            const cursorDot = document.getElementById('cursorDot');
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.2;
+                cursorY += (mouseY - cursorY) * 0.2;
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // HOVER EFFECTS
+            document.querySelectorAll('button, .nav-item, .info-card, .stat-box').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        }
+
+        // SLIDES
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let isAnimating = false;
+
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function goToSlide(index) {
+            if (isAnimating || index === currentSlideIndex) return;
+            const direction = index > currentSlideIndex ? 1 : -1;
+            changeSlide(direction, index);
+        }
+
+        function changeSlide(direction, targetIndex = null) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const targetSlide = targetIndex !== null ? slides[targetIndex] : slides[currentSlideIndex + direction];
+            if (!targetSlide) { isAnimating = false; return; }
+
+            slides[currentSlideIndex].classList.remove('active');
+            slides[currentSlideIndex].classList.add('prev');
+
+            setTimeout(() => {
+                targetSlide.classList.remove('prev');
+                targetSlide.classList.add('active');
+                currentSlideIndex = targetIndex !== null ? targetIndex : currentSlideIndex + direction;
+                updateSlide();
+                isAnimating = false;
+            }, 300);
+        }
+
+        function updateSlide() {
+            document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+            const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+            document.getElementById('nextBtn').textContent = 
+                currentSlideIndex === totalSlides - 1 ? 'Завершить ✓' : 'Вперёд →';
+        }
+
+        // KEYBOARD
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentSlideIndex < totalSlides - 1) changeSlide(1);
+            if (e.key === 'ArrowLeft' && currentSlideIndex > 0) changeSlide(-1);
+        });
+
+        // TOUCH/SWIPE
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, {passive: true});
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            handleSwipe(touchStartX, touchEndX, touchStartY, touchEndY);
+        }, {passive: true});
+
+        function handleSwipe(startX, endX, startY, endY) {
+            const dx = endX - startX;
+            const dy = endY - startY;
+            
+            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+                if (dx < 0 && currentSlideIndex < totalSlides - 1) {
+                    changeSlide(1);
+                } else if (dx > 0 && currentSlideIndex > 0) {
+                    changeSlide(-1);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
