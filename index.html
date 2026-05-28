@@ -131,22 +131,42 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 1000;
             display: flex;
-            gap: 30px;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .nav-item {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             letter-spacing: 1px;
             transition: all 0.3s;
             cursor: none;
+            padding: 5px 10px;
+            border-radius: 15px;
         }
 
         .nav-item:hover {
             color: #00d4ff;
             text-shadow: 0 0 20px #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* КНОПКА СРАВНЕНИЯ (ОСОБЫЙ ЦВЕТ) */
+        .nav-compare {
+            color: #fff !important;
+            background: linear-gradient(135deg, #ff006e, #ffbe0b) !important;
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.4);
+            font-weight: 800 !important;
+        }
+
+        .nav-compare:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 0, 110, 0.6);
+            color: white !important;
+            text-shadow: none !important;
         }
 
         /* PRESENTATION CONTAINER */
@@ -347,6 +367,40 @@
             color: rgba(255, 255, 255, 0.8);
         }
 
+        /* COMPARISON TABLE STYLES */
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .compare-table th {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 0, 255, 0.2));
+            padding: 20px;
+            text-align: left;
+            font-size: 18px;
+            color: white;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .compare-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 16px;
+        }
+
+        .compare-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .flag-icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
         /* NAVIGATION BUTTONS */
         .nav-buttons {
             position: absolute;
@@ -512,13 +566,14 @@
             }
 
             .nav-bar {
-                padding: 10px 20px;
-                gap: 15px;
+                padding: 10px 15px;
+                gap: 10px;
                 top: 10px;
             }
 
             .nav-item {
-                font-size: 11px;
+                font-size: 10px;
+                padding: 3px 6px;
             }
 
             .nav-buttons {
@@ -538,6 +593,11 @@
 
             .fluid-shape {
                 opacity: 0.3;
+            }
+            
+            .compare-table th, .compare-table td {
+                font-size: 12px;
+                padding: 10px;
             }
         }
 
@@ -635,6 +695,8 @@
         <a href="#" class="nav-item" onclick="goToSlide(4)">ВОДА</a>
         <a href="#" class="nav-item" onclick="goToSlide(5)">ПРИРОДА</a>
         <a href="#" class="nav-item" onclick="goToSlide(6)">НАСЕЛЕНИЕ</a>
+        <!-- НОВАЯ КНОПКА СРАВНЕНИЯ -->
+        <a href="#" class="nav-item nav-compare" onclick="goToSlide(7)">⚖️ СРАВНЕНИЕ</a>
     </nav>
 
     <div class="presentation-container">
@@ -652,7 +714,6 @@
                     <span style="color: #ff00ff;">Французская Республика</span>
                 </p>
                 <div class="image-showcase animate delay-3" style="max-width: 900px; margin: 60px auto;">
-                    <!-- ИСПРАВЛЕНО: Локальный путь -->
                     <img src="images/paris.jpg" alt="France">
                     <div class="image-caption">Париж - столица Франции</div>
                 </div>
@@ -671,7 +732,6 @@
             <div class="content-grid">
                 <div>
                     <div class="image-showcase">
-                        <!-- ИСПРАВЛЕНО: Локальный путь -->
                         <img src="images/europe-map.jpg" alt="Europe Map">
                         <div class="image-caption">Франция в Западной Европе</div>
                     </div>
@@ -727,17 +787,16 @@
                 </div>
                 <div>
                     <div class="image-showcase">
-                        <!-- ИСПРАВЛЕНО: Локальный путь -->
                         <img src="images/mont-blanc.jpg" alt="Mont Blanc">
                         <div class="image-caption">Монблан - высочайшая точка</div>
                     </div>
                     <div class="info-card" style="margin-top: 30px;">
                         <h3>ПОЛЕЗНЫЕ ИСКОПАЕМЫЕ</h3>
                         <ul>
-                            <li>Железная руда</li>
+                            <li>Железная руда (Лотарингия)</li>
                             <li>Уран</li>
                             <li>Бокситы</li>
-                            <li>Каменный уголь</li>
+                            <li>Каменный уголь (истощен)</li>
                             <li>Природный газ</li>
                             <li>Калийные соли</li>
                         </ul>
@@ -787,7 +846,6 @@
                 </div>
             </div>
             <div class="image-showcase" style="margin-top: 40px;">
-                <!-- ИСПРАВЛЕНО: Локальный путь -->
                 <img src="images/riviera.jpg" alt="French Riviera">
                 <div class="image-caption">Средиземноморское побережье - Лазурный берег</div>
             </div>
@@ -802,7 +860,6 @@
             <div class="content-grid">
                 <div>
                     <div class="image-showcase">
-                        <!-- ИСПРАВЛЕНО: Локальный путь -->
                         <img src="images/seine.jpg" alt="Seine">
                         <div class="image-caption">Река Сена в Париже</div>
                     </div>
@@ -854,7 +911,6 @@
                 </div>
                 <div>
                     <div class="image-showcase">
-                        <!-- ИСПРАВЛЕНО: Локальный путь -->
                         <img src="images/provence.jpg" alt="Provence">
                         <div class="image-caption">Прованс - лавандовые поля</div>
                     </div>
@@ -919,16 +975,114 @@
                 </div>
             </div>
             <div class="image-showcase" style="margin-top: 40px;">
-                <!-- ИСПРАВЛЕНО: Локальный путь -->
                 <img src="images/paris.jpg" alt="Paris People">
                 <div class="image-caption">Париж - крупнейший город Франции</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: COMPARISON (НОВЫЙ СЛАЙД) -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header">
+                <div class="slide-number">07 / СРАВНИТЕЛЬНАЯ ХАРАКТЕРИСТИКА</div>
+                <h1 class="slide-title">МЕТАЛЛУРГИЯ:<br>ФРАНЦИЯ vs ГЕРМАНИЯ</h1>
+            </div>
+            
+            <div class="stats-container" style="justify-content: center;">
+                <div class="stat-box" style="border-color: #0057b7; background: linear-gradient(135deg, rgba(0, 87, 183, 0.2), rgba(255, 215, 0, 0.1));">
+                    <div class="stat-number" style="background: linear-gradient(135deg, #0057b7, #ffd700); -webkit-background-clip: text;">🇩🇪 Германия</div>
+                    <div class="stat-label">Лидер Европы</div>
+                </div>
+                <div class="stat-box" style="border-color: #002395; background: linear-gradient(135deg, rgba(0, 35, 149, 0.2), rgba(255, 255, 255, 0.1));">
+                    <div class="stat-number" style="background: linear-gradient(135deg, #002395, #ffffff); -webkit-background-clip: text;">🇫🇷 Франция</div>
+                    <div class="stat-label">Ядерная энергетика</div>
+                </div>
+            </div>
+
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Показатель</th>
+                        <th>🇩 Германия</th>
+                        <th>🇫 Франция</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Черная металлургия (Сталь)</strong></td>
+                        <td>
+                            <span class="highlight">35-40 млн тонн/год</span><br>
+                            Крупнейший производитель в ЕС.<br>
+                            Центры: Рурский бассейн, Саар.
+                        </td>
+                        <td>
+                            <span class="highlight">13-15 млн тонн/год</span><br>
+                            Снижение производства.<br>
+                            Центры: Лотарингия, Север.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Цветная металлургия (Алюминий)</strong></td>
+                        <td>
+                            <span class="highlight">Развитое производство</span><br>
+                            Импорт сырья (бокситов).<br>
+                            Энергоемкие процессы.
+                        </td>
+                        <td>
+                            <span class="highlight">Лидер в ЕС по алюминию</span><br>
+                            Благодаря дешевой АЭС энергии.<br>
+                            Компании: Rio Tinto Alcan.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Сырьевая база</strong></td>
+                        <td>
+                            Собственная железная руда (истощается).<br>
+                            Импорт угля и руды.
+                        </td>
+                        <td>
+                            Железная руда Лотарингии (низкого качества).<br>
+                            Полный импорт высококачественной руды.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Энергетика для промышленности</strong></td>
+                        <td>
+                            Уголь, газ, ВИЭ.<br>
+                            Высокие цены на энергию.
+                        </td>
+                        <td>
+                            <span class="highlight">Атомные электростанции (70%)</span><br>
+                            Низкая себестоимость электроэнергии.<br>
+                            Конкурентное преимущество.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ключевые компании</strong></td>
+                        <td>
+                            ThyssenKrupp, Salzgitter,<br>
+                            ArcelorMittal (немецкие заводы).
+                        </td>
+                        <td>
+                            ArcelorMittal (штаб-квартира в Люксембурге, заводы во Франции),<br>
+                            Eramet (цветные металлы).
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-card" style="margin-top: 30px; border-color: #ff006e;">
+                <h3 style="color: #ff006e;">ВЫВОД</h3>
+                <p>
+                    <strong>Германия</strong> превосходит Францию по объемам черной металлургии благодаря мощной промышленной базе и машиностроению. 
+                    Однако <strong>Франция</strong> имеет преимущество в цветной металлургии (алюминий) благодаря дешевой электроэнергии от АЭС, что снижает затраты на энергоемкие производства.
+                </p>
             </div>
         </div>
 
         <!-- NAVIGATION -->
         <div class="nav-buttons">
             <button class="btn" id="prevBtn" onclick="changeSlide(-1)">← Назад</button>
-            <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">7</span></div>
+            <div class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">8</span></div>
             <button class="btn" id="nextBtn" onclick="changeSlide(1)">Вперёд →</button>
         </div>
 
